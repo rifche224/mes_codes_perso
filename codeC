@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    void echange(int *a,int *b){
+       int svg;
+       svg=*a;
+       *a = *b;
+      *b = svg;
+    }
+    int a=10;
+    int b=20;
+    printf("avant a :%d\n",a);
+    printf("avant b :%d\n",b);
+    echange(&a,&b);
+    printf("apres a :%d\n" ,a);
+    printf("apres b :%d\n" ,b);
+    printf("************************************************************\ns");
+    printf("------------------entrainement à la maison-------------------\n");
+    int che = 20;
+    int *pi;
+    pi=&che;
+     printf("la valeur de che est : %d\n",che);
+     printf("celle du pointeur est:%d\n",*pi);
+
+    printf("**************************************************************\n");
+    printf("les pointeurs et les tableaux\n");
+    printf("***************************************************************\n");
+
+       int tab[10]={28,25,35,14,20,15,10,48,99,100};
+       int *p;
+       p=tab;
+        p[3]++;
+       for(int i=0;i<10;i++){
+
+       printf("%d\n",p[i]);
+    }
+
+    printf("%d",*(tab+10));
+
+    printf("l'allocation dynamique avec les pointeurs\n");
+    printf("******************************************\n");
+      int *path = malloc(10*sizeof(int));
+        path[10]++;
+       if(path){
+           for(int i=0;i<=10;i++){
+             printf("veuillez entrer la valeur a l'emplacement %d\n",i);
+                scanf("%d",&path[i]);
+                }
+                  for(int i=0;i<=10;i++){
+                     printf("%d :",path[i]);
+                  }
+           free(path);
+
+       }
+
+       //cette fonction permet de determiner un max
+
+       void maximum(int *tab, int n){
+          int nmax=0;
+          for(int i=0;i<n;i++){
+              if(tab[i]>nmax){
+                nmax=tab[i];
+              }
+          }
+            return nmax;
+       }
+       int tabi[]={22,5,14,48,5,55,25,25,9,10};
+//       printf("le plus grand nombre est :%d\n",maximum(tabi,10));
+
+       printf("*******************************************************\n");
+       printf("les listes chainées en C\n");
+        // cette fonction me permet d'ajouter des element dans ma liste
+        typedef struct pile{
+             int valeur;
+             struct pile *prec;
+        }pile;
+
+          pile *Mapile=NULL;
+
+        void push(pile **p, int val){
+            pile *element = malloc(sizeof(pile));
+            element->valeur=val;
+            element->prec=*p;
+            *p=element;
+        }
+
+             push(&Mapile,10);
+    // cette fonction me permettra de retirer des elements dans ma liste
+        int Pop(pile **p)
+{
+        int Val;
+        pile *tmp;
+        if(!*p) return -1;     /* Retourne -1 si la pile est vide. */
+        tmp = (*p)->prec;
+        Val = (*p)->valeur;
+        free(*p);
+        *p = tmp;       /* Le pointeur pointe sur le dernier élément. */
+        return Val;     /* Retourne la valeur soutirée de la pile. */
+
+}
+            pile *MaPile = NULL;
+            printf("%d\n",Pop(&MaPile));
+            
+    // cette fonction me prmettra de parcourir des listes chainées
+    
+
+
+    return 0;
+}
+
